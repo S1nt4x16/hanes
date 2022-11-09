@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\KeranjangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,11 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::middleware(['auth'])->group(function () 
 {
 
-Route::get('/hh', [AuthController::class, 'hh'])->name('hh');
+    Route::post('/hh', [AuthController::class, 'hh'])->name('hh');
+
+    Route::prefix('keranjang')->group(function () {
+        Route::get('/', [KeranjangController::class, 'index'])->name('keranjang_master');
+        Route::post('/store', [KeranjangController::class, 'store'])->name('kstorejj');
+    });
 
 });

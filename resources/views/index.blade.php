@@ -66,14 +66,15 @@ https://templatemo.com/tm-537-art-factory
                             <li class="scroll-to-section"><a href="#contact-us">Contact Us</a></li>
                             @if (Auth::check())
                                 <li class="scroll-to-section">
+                                    <a href="{{ url('keranjang') }}">
+                                        Keranjang
+                                    </a>
+                                </li>
+                                <li class="scroll-to-section">
                                     <a data-toggle="modal" data-target="#exampleModal2">
                                         Logout
                                     </a>
                                 </li>
-                                <div class="sidebar-brand d-none d-md-flex">
-                                    <img class="sidebar-brand-narrow" 
-                                        width="35" height="35" src="{{ asset('assets/images/logo.png') }}" alt="">
-                                </div>
                             @else
                                 <li class="scroll-to-section">
                                     <a data-toggle="modal" data-target="#exampleModal">
@@ -197,15 +198,21 @@ https://templatemo.com/tm-537-art-factory
         <div class="container">
             <div class="row">
                 <div class="owl-carousel owl-theme">
-                    <div class="item service-item">
-                        <div class="icon">
-                            <i><img src="assets/images/service-icon-01.png" alt=""></i>
+                    @foreach($item as $i)
+                        <div class="item service-item">
+                            <div class="icon">
+                                <i><img src="assets/images/service-icon-01.png" alt=""></i>
+                            </div>
+                            <h5 class="service-title">{{$i->nama_item}}</h5>
+                            <p>Aenean vulputate massa sed neque consectetur, ac fringilla quam aliquet. Sed a enim nec eros tempor cursus at id libero.</p>
+                            <form action="{{ route('kstorejj') }}" method="POST">
+                            @csrf
+                                <input type="hidden" name="id_item" value="{{ $i->id }}">
+                                <button type="submit" name="simpan" class="main-button">Simpan</button>
+                            </form>
                         </div>
-                        <h5 class="service-title">First Box Service</h5>
-                        <p>Aenean vulputate massa sed neque consectetur, ac fringilla quam aliquet. Sed a enim nec eros tempor cursus at id libero.</p>
-                        <a href="#" class="main-button">Read More</a>
-                    </div>
-                    <div class="item service-item">
+                    @endforeach
+                    <!-- <div class="item service-item">
                         <div class="icon">
                             <i><img src="assets/images/service-icon-02.png" alt=""></i>
                         </div>
@@ -252,7 +259,7 @@ https://templatemo.com/tm-537-art-factory
                         <h5 class="service-title">Seventh Title Box</h5>
                         <p>Sed a consequat velit. Morbi lectus sapien, vestibulum et sapien sit amet, ultrices malesuada odio. Donec non quam.</p>
                         <a href="#" class="main-button">Read More</a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
